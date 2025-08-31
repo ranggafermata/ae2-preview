@@ -1,0 +1,62 @@
+[
+  {
+    "name": "CALSPHERE 1",
+    "latitude": 77.80734524728929,
+    "longitude": 47.48241602664207,
+    "altitude_km": 988.7018227718877
+  },
+  {
+    "name": "CALSPHERE 2",
+    "latitude": -1.4037516901882199,
+    "longitude": 52.34498049591015,
+    "altitude_km": 1058.6097082657482
+  },
+  {
+    "name": "LCS 1",
+    "latitude": 2.871402644716406,
+    "longitude": 4.368840497915506,
+    "altitude_km": 2785.9977824317593
+  },
+  {
+    "name": "TEMPSAT 1",
+    "latitude": 80.04855209309798,
+    "longitude": 16.634307504542296,
+    "altitude_km": 1109.1992203520524
+  },
+  {
+    "name": "CALSPHERE 4A",
+    "latitude": -85.2998374546561,
+    "longitude": -69.77918592432215,
+    "altitude_km": 1101.9815683035756
+  },
+  {
+    "name": "OPS 5712 (P/L 160)",
+    "latitude": -65.83684992335441,
+    "longitude": -55.2008227030108,
+    "altitude_km": 681.6441174965541
+  },
+  {
+    "name": "LES-5",
+    "latitude": -0.8828609286123297,
+    "longitude": 64.0252608233981,
+    "altitude_km": 33554.8296515665
+  },
+  {
+    "name": "SURCAL 159",
+    "latitude": -67.47950441401841,
+    "longitude": -175.98048882701517,
+    "altitude_km": 918.8255606125476
+  },
+  {
+    "name": "OPS 5712 (P/L 153)",
+    "latitude": -41.67508524792032,
+    "longitude": 35.59545169728524,
+    "altitude_km": 917.153771589016
+  },
+  {
+    "name": "SURCAL 150B",
+    "latitude": -63.72580771783218,
+    "longitude": -90.99313163278313,
+    "altitude_km": 490.2987292630814
+  }
+]

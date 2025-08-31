@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Angel's Eye 2: Orbital Edition</title>
+
+  <!-- OpenLayers CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v10.6.0/ol.css">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Your app CSS (ensure path is correct) -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-dark text-light">
+
+<div class="container-fluid p-0">
+  <div class="row g-0">
+
+    <!-- Map column -->
+    <div id="map-col" class="position-relative" style="height:100vh;">
+      <!-- Toolbar (keeps existing markup) -->
+      <div class="toolbar">
+        <label><input type="checkbox" id="toggle-stations" checked> Ground Stations</label>
+        <label><input type="checkbox" id="toggle-satellites" checked> Visible Satellites</label>
+        <label><input type="checkbox" id="toggle-orbits" checked> Orbit Paths</label>
+       
+
+        <div id="basemap-wrapper">
+          <label>
+            Map Style:
+            <select id="basemap-switcher" class="form-select form-select-sm">
+              <option value="osm">OpenStreetMap</option>
+              <option value="sat">Satellite</option>
+              <option value="dark">Dark</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="map-legend">
+          <b>Map Legend</b><br>
+          <div style="display:flex;align-items:center"><div style="background:green;width:15px;height:15px;border-radius:50%"></div><span style="margin-left:5px">Observer</span></div>
+          <div style="display:flex;align-items:center"><div style="background:blue;width:15px;height:15px;border-radius:50%"></div><span style="margin-left:5px">Ground Station</span></div>
+          <div style="display:flex;align-items:center"><div style="background:red;width:15px;height:15px;border-radius:50%"></div><span style="margin-left:5px">Satellite</span></div>
+          <div style="display:flex;align-items:center"><div style="border-top:2px solid orange;width:15px"></div><span style="margin-left:5px">Orbit Path</span></div>
+        </div>
+      </div>
+
+      <div id="map" class="map-panel" style="height:100%;"></div>
+    </div>
+
+    <div id="gps-console" class="col-md-4" style="background:#222;">
+      <h4>GPS Console</h4>
+      <h6>(coming soon)</h6>
+      <p>This section will display GPS data and allow for real-time tracking.</p>
+    </div>
+
+    <!-- Sidebar column (Bootstrap collapse so it can be hidden) -->
+    <div class="col-md-4">
+    
+      <!-- Sidebar content -->
+      <div id="viewer-sidebar" class="viewer-sidebar collapse show h-100">
+        <div class="sidebar-header d-flex align-items-center justify-content-between">
+          <h3 class="m-0">Angel's Eye 2</h3>
+        </div>
+
+        <div class="viewer-panel p-3 overflow-auto" style="height:calc(100vh - 60px);">
+          <!-- Satellite panel -->
+          <div id="satellite-info" style="display:none;">
+            <h4>Satellite Information</h4>
+            <div id="satellite-details"><p>Select a satellite to view details.</p></div>
+          </div>
+
+          <!-- Ground station panel -->
+          <div id="ground-station-info" style="display:none;">
+            <h4>Ground Station Information</h4>
+            <div id="station-details"><p>Select a ground station to view details.</p></div>
+          </div>
+
+          <!-- Orbit panel -->
+          <div id="orbit-info" style="display:none;">
+            <h4>Orbit Information</h4>
+            <div id="orbit-details"><p>Select an orbit path to view details.</p></div>
+          </div>
+        </div>
+
+        <div id="image-viewer" class="p-3 border-top" style="background:#111;">
+          <div id="ndvi-container" class="mb-2">
+            <img id="ndvi-image" src="assets/comings.gif" alt="NDVI Overlay" style="max-width:100%;display:block">
+          </div>
+          <button id="refresh-ndvi" class="btn btn-success btn-sm">Refresh NDVI</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  
+</div>
+
+<!-- OpenLayers JS -->
+<script src="https://cdn.jsdelivr.net/npm/ol@v10.6.0/dist/ol.js"></script>
+
+<!-- Bootstrap JS bundle (includes Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- small helper to wire the toggle button to bootstrap collapse (keeps compatibility with your existing map.js listener) -->
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    const sidebarEl = document.getElementById('viewer-sidebar');
+    const toggleBtn = document.getElementById('toggle-sidebar');
+    if (sidebarEl && toggleBtn && window.bootstrap) {
+      const bs = new bootstrap.Collapse(sidebarEl, { toggle: false });
+      toggleBtn.addEventListener('click', () => bs.toggle());
+      sidebarEl.addEventListener('shown.bs.collapse', () => {
+        toggleBtn.innerHTML = '➤'; // Change to collapse icon
+      });
+      sidebarEl.addEventListener('hidden.bs.collapse', () => {
+        toggleBtn.innerHTML = '⮜'; // Change to expand icon
+        document.querySelector('.viewer-sidebar.collapsed')?.style.setProperty('transform', 'translateX(40%)');
+        document.querySelector('.viewer-sidebar.collapsed')?.style.setProperty('z-index', '2000');
+      });
+      
+    }
+  });
+</script>
+
+<!-- Your map script -->
+<script src="map.js"></script>
+</body>
+</html>
